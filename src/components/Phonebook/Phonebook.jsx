@@ -1,4 +1,4 @@
-import { Component, useState, useEffect, useRef } from 'react';
+import { Component, useState, useEffect } from 'react';
 import { nanoid } from 'nanoid';
 
 import { Section } from "../Section/Section";
@@ -9,7 +9,6 @@ import { Filter } from '../Filter/Filter';
 export const Phonebook = () => {
   const [contacts, setContacts] = useState(getLocalStorage);
   const [filter, setFilter] = useState('');
-  const isFirstRender = useRef(true)
 
   function getLocalStorage() {
     const savedLS = localStorage.getItem('contacts');
@@ -19,10 +18,6 @@ export const Phonebook = () => {
   }
 
   useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      return;
-    }
       localStorage.setItem('contacts', JSON.stringify(contacts));
   }, [contacts]);
 
